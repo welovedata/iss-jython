@@ -7,16 +7,26 @@ import calendar
 current = []
 
 def getSeconds(data):
+    """
+    Convert the time into GMT seconds from epoch
+    """
     dt = datetime.datetime.strptime(data, "%Y-%m-%dT%H:%M:%S")
     return calendar.timegm(dt.timetuple())
 
 def getTime(pazz, moment):
+    """
+    Find the start/max/end times of the pass
+    """
     nodes = pazz.getElementsByTagName(moment)[0].getElementsByTagName('time')
     data = nodes[0].childNodes[0].data[:-1]
     print "%s: %s" % (moment, data)
     return getSeconds(data)
 
 def fetch():
+    """
+    Fetch the satellite data in XML and parse out the passes, and a date after
+    which we'll need to poll again.
+    """
     request = urllib2.Request('http://api.uhaapi.com/satellites/25544/passes?lat=50.72738&lng=-3.47421', headers={'Accept' : 'application/xml'})
     response = urllib2.urlopen(request).read()
     xml = parseString(response)
@@ -45,6 +55,14 @@ def map(value, f, t, f2, t2):
 HALF_HOUR = 30 * 60
 
 def getData():
+    """
+    Callback that's invoked every second by the Processing draw() loop.
+    Just calculates how 'far' away we are from an overhead pass of the ISS as
+    a number between 0 and 255, where:
+       0 - no pass due
+       1-127 - linear build up over 30 minutes
+       128-255 - overhead, with linear build up to maximum point
+    """
     now = time.mktime(time.gmtime())
     start = current[0]['start']
     max = current[0]['max']
@@ -73,13 +91,16 @@ def getData():
             # on way to max
             secsTo = highest - now
             value = map(secsTo, highest-start, 0, 128, 255)
+            secsSince = end - now
         else:
             # past max
-            secsSince = end - now
             value = map(secsSince, end-highest, 0, 255, 128)
 
     print value
     return int(value)
+
+
+# Main entry point for python code
 
 fetch()
 
