@@ -1,7 +1,9 @@
-bin/
+bin/*.class
 lib/core.jar
 lib/RXTXcomm.jar
 lib/serial.jar
+lib/Arduino.jar
+lib/jython.jar
 librxtxSerial.jnilib
 iss$py.class
 

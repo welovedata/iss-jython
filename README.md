@@ -30,7 +30,9 @@ At runtime, the code works by:
 Setup
 -----
 
-A. Need to create a lib folder and copy the Processing jars into it:
+A. Processing
+
+i. Need to create a lib folder and copy the Processing jars into it:
    lib/core.jar
    lib/RXTXcomm.jar
    lib/serial.jar
@@ -38,9 +40,24 @@ The easiest way to find these is to export a Processing sketch as an
 application, you'll find the jars in the output folder.
 
 
-B. The native RXTX serial library also needs to be copied into the top level
+ii. The native RXTX serial library also needs to be copied into the top level
 directory -- on my Mac I found this at:
 /Applications/Processing.app/Contents/Resources/Java/modes/java/libraries/serial/library/macosx/librxtxSerial.jnilib
 
-C. The Java code needs to be compiled by loading the project into Eclipse.
+B. Arduino
+
+Download the zip file referenced on this page:
+http://www.arduino.cc/playground/Interfacing/Processing
+Copy lib/Arduino.jar
+
+C. Jython
+
+Download Jython and install
+http://www.jython.org/downloads.html
+Copy lib/jython.jar
+
+D. Compile
+
+The Java code needs to be compiled into classes into bin/ by loading the project into Eclipse.
+
  

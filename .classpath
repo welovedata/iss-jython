@@ -5,6 +5,7 @@
 	<classpathentry kind="lib" path="lib/core.jar"/>
 	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
 	<classpathentry kind="lib" path="lib/serial.jar"/>
-	<classpathentry kind="lib" path="/Users/andy/jython2.5.3b1/jython.jar"/>
+	<classpathentry kind="lib" path="lib/Arduino.jar"/>
+	<classpathentry kind="lib" path="lib/jython.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
